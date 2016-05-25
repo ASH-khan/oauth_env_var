@@ -7,22 +7,21 @@
     Create a controller using this template
 """
 from system.core.controller import *
-from flask_oauth import OAuth
+import oauth2 as oauth
+import json
 import signing
 
-ck = signing.consumer_key()
-cs = signing.consumer_secret()
+CONSUMER_KEY = signing.consumer_key()
+CONSUMER_SECRET = signing.consumer_secret()
+ACCESS_KEY = signing.access_key()
+ACCESS_SECRET = signing.access_secret()
 
-oauth = OAuth()
+consumer = oauth.Consumer(key=CONSUMER_KEY, secret=CONSUMER_SECRET)
+access_token = oauth.Token(key=ACCESS_KEY, secret=ACCESS_SECRET)
+client = oauth.Client(consumer, access_token)
 
-twitter = oauth.remote_app('twitter',
-    base_url='https://api.twitter.com/1/',
-    request_token_url='https://api.twitter.com/oauth/request_token',
-    access_token_url='https://api.twitter.com/oauth/access_token',
-    authorize_url='https://api.twitter.com/oauth/authenticate',
-    consumer_key=ck,
-    consumer_secret=cs
-)
+timeline_endpoint = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+response, data = client.request(timeline_endpoint)
 
 class Welcome(Controller):
     def __init__(self, action):
@@ -31,4 +30,5 @@ class Welcome(Controller):
         self.db = self._app.db
 
     def index(self):
-        return self.load_view('index.html')
+        tweets = json.loads(data)
+        return self.load_view('index.html', tweets=tweets)
