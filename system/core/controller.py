@@ -5,7 +5,7 @@
 
     We also have to define a dispatch_request method that helps the controller load a view
 """
-from flask import current_app, render_template, redirect, request, session, flash, jsonify, url_for
+from flask import current_app, render_template, redirect, request, session, flash, jsonify
 from flask.views import View
 import requests
 
