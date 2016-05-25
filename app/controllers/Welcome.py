@@ -29,7 +29,6 @@ class Welcome(Controller):
         self.db = self._app.db
 
     def index(self):
-
         timeline_endpoint = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         response, data = client.request(timeline_endpoint)
         tweets = json.loads(data)
