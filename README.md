@@ -6,18 +6,19 @@ I'm using some libraries here, json and Flask-OAuth.  No need to pip install jso
 
 $ pip install Flask-OAuth
 
-I'm protecting my keys in a pretty hacky way.  The better way would be to set some environmental variables (google it).  But for the sake of simplicity and demonstration, we will hard code out variables into a separate file in our root directory, and then import that file.  My signing.py file looks like this:
-
+Let's protect your keys a little more securely now.  Activate your virtual environment.  In the command line, enter:
 ```
-def consumer_key():
-    return 'put your secret key here'
-def consumer_secret():
-    return 'put your consumer key here'
-def access_key():
-    return 'put your access token here'
-def access_secret():
-    return 'put your access token secret here'
+CONSUMER_KEY="your consumer key"; export CONSUMER_KEY
+CONSUMER_SECRET="your consumer key"; export CONSUMER_SECRET
+ACCESS_KEY="your consumer key"; export ACCESS_KEY
+ACCESS_SECRET="your consumer key"; export ACCESS_SECRET
 ```
+your  keys are now saved in your virtual environment.  just remember that you'll have to repeat this process when you deploy.  now, from your controller, you can access your environmental variables like so:
+```
+import os
+os.environ['CONSUMER_KEY']
+```
+this is a great way of protecting your keys!
 
 how do I get these keys, you ask?  by visiting [https://apps.twitter.com/](https://apps.twitter.com/) and getting yourself an consumer key and secret key.  record these somewhere secure.  twitter will ask for your name, app name, and url.  The url can be a placeholder, but needs to be formatted like a valid url.  Mine, for example, is www.placeholder.com.  Once you've done this, navigate to application management, click on keys and access tokens, and generate an access key.  this will give you two values, your access key and your access secret.
 
