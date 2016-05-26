@@ -9,16 +9,16 @@
 from system.core.controller import *
 import oauth2 as oauth
 import json
-import signing
+import os
 
 class Welcome(Controller):
     def __init__(self, action):
         super(Welcome, self).__init__(action)
 
-        CONSUMER_KEY = signing.consumer_key()
-        CONSUMER_SECRET = signing.consumer_secret()
-        ACCESS_KEY = signing.access_key()
-        ACCESS_SECRET = signing.access_secret()
+        CONSUMER_KEY = os.environ['CONSUMER_KEY']
+        CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+        ACCESS_KEY = os.environ['ACCESS_KEY']
+        ACCESS_SECRET = os.environ['ACCESS_SECRET']
 
         consumer = oauth.Consumer(key=CONSUMER_KEY, secret=CONSUMER_SECRET)
         access_token = oauth.Token(key=ACCESS_KEY, secret=ACCESS_SECRET)
