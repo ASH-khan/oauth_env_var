@@ -6,14 +6,14 @@ I'm using some libraries here, json and Flask-OAuth.  No need to pip install jso
 
 $ pip install Flask-OAuth
 
-Let's protect your keys a little more securely now.  Activate your virtual environment.  In the command line, enter:
+Let's protect your keys a little more securely now.  Open the virtualenv directory, then inside of the bin directory, find the activate file.  When you run the 'source venv/bin/activate' command, this file executes a number of bash scripts.  We will now add the following to the top of the file as a way of protecting our oauth keys
 ```
-CONSUMER_KEY="your consumer key"; export CONSUMER_KEY
-CONSUMER_SECRET="your consumer key"; export CONSUMER_SECRET
-ACCESS_KEY="your consumer key"; export ACCESS_KEY
-ACCESS_SECRET="your consumer key"; export ACCESS_SECRET
+export CONSUMER_KEY="your consumer key"; export CONSUMER_KEY
+export CONSUMER_SECRET="your consumer key"; export CONSUMER_SECRET
+export ACCESS_KEY="your consumer key"; export ACCESS_KEY
+export ACCESS_SECRET="your consumer key"; export ACCESS_SECRET
 ```
-your  keys are now saved in your virtual environment.  just remember that you'll have to repeat this process when you deploy.  now, from your controller, you can access your environmental variables like so:
+your keys will now be saved in your virtual environment each time you activate your venv.  just remember that you'll have to repeat this process when you deploy.  now, from your controller, you can access your environmental variables like so:
 ```
 import os
 os.environ['CONSUMER_KEY']
